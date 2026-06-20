@@ -1,8 +1,8 @@
 # manim-best-practices
 
-A [Claude Code](https://claude.com/claude-code) **agent skill** that teaches Claude to write and render [Manim](https://www.manim.community/) animations: programmatic, 3Blue1Brown-style math and explainer videos in Python.
+A [Claude Code](https://claude.com/claude-code) **agent skill** for writing and rendering [Manim](https://www.manim.community/) animations: programmatic, 3Blue1Brown-style math and explainer videos in Python.
 
-The skill gives Claude domain knowledge for ManimCommunity: scene anatomy, mobjects and layout, animations, easing and timing, rendering, LaTeX math, plots and axes, updaters, and camera/3D. It is install-agnostic. It assumes the `manim` CLI is on your `PATH` and never prescribes how you got it.
+It hands Claude the ManimCommunity reference it needs: scene anatomy, mobjects and layout, animations, easing and timing, rendering, LaTeX math, plots and axes, updaters, and camera/3D. You bring your own `manim`. The skill assumes the CLI sits on your `PATH` and never tells you how to install it.
 
 ## What's inside
 
@@ -22,7 +22,7 @@ rules/              # focused, load-on-demand reference
 
 ## Install
 
-Clone into your skills directory so Claude picks it up. The folder name should match the skill's `name` (`manim-best-practices`):
+Clone it into your skills directory. Name the folder to match the skill's `name` (`manim-best-practices`):
 
 ```bash
 # user-level (all projects)
@@ -32,11 +32,11 @@ git clone https://github.com/fbereilh/manim-skill ~/.claude/skills/manim-best-pr
 git clone https://github.com/fbereilh/manim-skill .claude/skills/manim-best-practices
 ```
 
-Claude reads `SKILL.md` and pulls in the relevant `rules/*.md` on demand. Ask Claude to "make a Manim video of …" and it applies the skill.
+Claude reads `SKILL.md` and loads the matching `rules/*.md` when it needs them. Ask it to "make a Manim video of …" and it follows the skill.
 
 ## Requirements
 
-You need the `manim` CLI (ManimCommunity) on your `PATH`, plus `ffmpeg`. LaTeX is optional and only needed for typeset equations (`MathTex` / `Tex`). The skill works with any install method: conda/pixi, Nix/devbox, the `manimcommunity/manim` Docker image, or pip into a venv. See `SKILL.md` → *Requirements* for details.
+Put the `manim` CLI (ManimCommunity) and `ffmpeg` on your `PATH`. Add LaTeX only if you render equations (`MathTex` / `Tex`). Any install method works: conda/pixi, Nix/devbox, the `manimcommunity/manim` Docker image, or pip in a venv. `SKILL.md` → *Requirements* has the specifics.
 
 ## License
 
