@@ -26,10 +26,10 @@ Clone it into your skills directory. Name the folder to match the skill's `name`
 
 ```bash
 # user-level (all projects)
-git clone https://github.com/fbereilh/manim-skill ~/.claude/skills/manim-best-practices
+git clone https://github.com/fbereilh/skill-manim ~/.claude/skills/manim-best-practices
 
 # or project-level
-git clone https://github.com/fbereilh/manim-skill .claude/skills/manim-best-practices
+git clone https://github.com/fbereilh/skill-manim .claude/skills/manim-best-practices
 ```
 
 Claude reads `SKILL.md` and loads the matching `rules/*.md` when it needs them. Ask it to "make a Manim video of …" and it follows the skill.
