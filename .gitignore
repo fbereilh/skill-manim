@@ -1,14 +1,6 @@
-# manim render output
-media/
-images/
+# os
+.DS_Store
 
 # python
 __pycache__/
 *.pyc
-.venv/
-
-# devbox / nix local env (keep devbox.json + devbox.lock)
-.devbox/
-
-# os
-.DS_Store

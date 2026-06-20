@@ -2,12 +2,11 @@
 
 `MathTex` / `Tex` typeset with a real LaTeX installation. **Requires LaTeX** — if not installed, rendering throws (missing `latex`/`dvisvgm`). Plain `Text` needs no LaTeX; use it for non-math text.
 
-## Install LaTeX (only if using MathTex/Tex)
+## Getting LaTeX (only if using MathTex/Tex)
 
-- mac: `brew install --cask mactex-no-gui` (full, large) or `brew install --cask basictex` (small; may need `tlmgr install` for extra packages like `standalone`, `preview`, `dvisvgm`).
-- Linux: a TeX dist plus `dvisvgm` (e.g. `apt install texlive texlive-latex-extra dvisvgm`).
+Provide a TeX distribution plus `dvisvgm` however the project manages its environment — a system install (mac: `brew install --cask mactex-no-gui` or the smaller `basictex`; Linux: `apt install texlive texlive-latex-extra dvisvgm`), a conda/nix package, or a `manim`-with-LaTeX Docker image. Some minimal TeX dists need extra packages (`standalone`, `preview`, `dvisvgm`) added afterward.
 
-Verify: `latex --version` and `dvisvgm --version` resolve.
+Verify it's reachable: `latex --version` and `dvisvgm --version` resolve.
 
 ## MathTex vs Tex
 

@@ -53,10 +53,10 @@ manim -qh -r 1080,1920 file.py SceneName   # 9:16 vertical
 
 Set `config.frame_width`/`frame_height` in-scene if you need the coordinate frame to match the aspect.
 
-## Running via devbox
+## Environment wrappers
 
-If the project is set up with devbox (recommended — see SKILL.md), prefix render commands with `devbox run --`, e.g. `devbox run -- manim -ql scene.py SceneName`, or enter `devbox shell` once and run `manim ...` directly. Avoid `bash -lc` wrappers — a login shell can change the working directory and manim won't find the scene file.
+If the project's manim lives inside an environment (a venv, `devbox run --`, `pixi run`, `docker run …`), apply that same wrapper to the `manim` command — the flags above are identical either way. Avoid `bash -lc` wrappers: a login shell can change the working directory so manim can't find the scene file.
 
 ## ffmpeg
 
-Manim shells out to the `ffmpeg` binary on PATH to encode. With devbox, ffmpeg comes from the Nix env automatically. With the uv + `imageio-ffmpeg` route, make sure the `.venv/bin/ffmpeg` symlink exists and the venv is on PATH. Error `FileNotFoundError: ffmpeg` means it isn't found.
+Manim shells out to the `ffmpeg` binary on PATH to encode. `FileNotFoundError: ffmpeg` means it isn't on PATH — install it or activate the environment that provides it (most manim installs bundle it).

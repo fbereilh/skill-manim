@@ -11,35 +11,17 @@ Use this skill whenever dealing with Manim code to obtain domain-specific knowle
 
 This skill targets **ManimCommunity (`manim`)**, not the older `manimgl` / `3b1b/manim`. Their APIs differ; do not mix.
 
+## Requirements
+
+This skill assumes the `manim` CLI (ManimCommunity) is on `PATH`. Check with `manim --version`. The install method does not matter. Run the plain `manim …` commands in this skill as written. If the project keeps manim inside an environment (a venv, `devbox run --`, `pixi run`, `docker run …`), apply that same wrapper to each `manim` call.
+
+You also need an `ffmpeg` binary on `PATH` for encoding; most install methods include it. LaTeX is optional. You need it only for `Tex` / `MathTex` (typeset equations), since plain `Text()` uses Pango. See [rules/math.md](rules/math.md).
+
+No `manim` yet? Any route works: a conda/pixi env (`pixi add manim`), a Nix/devbox env, the `manimcommunity/manim` Docker image, or pip into a venv. With pip, some platforms also need the system `cairo` dev lib plus `pkg-config`, so a method that bundles cairo/pango/ffmpeg saves you the compile step.
+
 ## New project setup
 
-Manim needs Python plus native pieces — the **cairo**/**pango** C libraries (for `pycairo`/`manimpango`) and an **ffmpeg** binary. The painful part is `pycairo`: it has no macOS-arm wheel, so a pip install compiles it from source and needs the cairo headers + `cairo.pc`. The clean, reproducible fix is **devbox** (Nix), which ships a prebuilt `manim` with all native deps bundled — no brew, no pip compile, no system pollution.
-
-Create `devbox.json`:
-
-```json
-{
-  "packages": ["manim@latest", "ffmpeg@latest"],
-  "shell": { "init_hook": ["echo 'manim env ready'"] }
-}
-```
-
-Then:
-
-```bash
-devbox install                                   # pulls prebuilt manim + deps from the nix cache
-devbox run -- manim -ql scene.py SceneName       # render inside the env
-# or: devbox shell   (drop into the env, then run manim directly)
-```
-
-This avoids the `pycairo`-from-source trap entirely — Nix's manim is already linked against its own cairo/pango.
-
-**Other install routes** (if not using devbox):
-- **conda/pixi**: `pixi add manim` — conda-forge ships manim binary with cairo/pango/ffmpeg bundled.
-- **uv + system cairo**: `uv pip install manim imageio-ffmpeg`, but first install the cairo C lib (mac: `brew install cairo pkg-config`; Linux: `apt install libcairo2-dev pkg-config`). ffmpeg via the `imageio-ffmpeg` pip pkg — symlink it onto PATH: `ln -sf "$(.venv/bin/python -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')" .venv/bin/ffmpeg`.
-- **Docker**: `manimcommunity/manim` image, zero host deps.
-
-**LaTeX is optional** — only for `Tex` / `MathTex` (typeset equations); plain `Text()` uses Pango, no LaTeX. With devbox, add `"texlive.combined.scheme-medium"` (or `"texliveMedium"`) to `packages`. Otherwise mac: `brew install --cask mactex-no-gui` / `basictex`. See [rules/math.md](rules/math.md).
+A scene is one `.py` file; no scaffolding needed. Create `scene.py`, define a `Scene` subclass, and render it by class name (see *Rendering*).
 
 ## Scene anatomy
 
